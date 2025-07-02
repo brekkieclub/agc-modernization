@@ -10,7 +10,7 @@ class AGC:
         self.PC = (self.PC + 1) & 0xFFF
         return instr
 
-    def decode_execute(self, instr):
+        def decode_execute(self, instr):
         opcode = (instr >> 12) & 0xF
         address = instr & 0xFFF
 
@@ -20,11 +20,10 @@ class AGC:
             self.running = False
             return True
 
-        # Minimal opcode demo:
         if opcode == 0o0:
             print("[AGC] NOP or unrecognized no-op")
         elif opcode == 0o1:
-            print("[AGC] Opcode 001 - Not yet implemented")
+            print("[AGC] Opcode 001 - TEST PLACEHOLDER")
         else:
             print(f"[AGC] Unknown opcode {opcode:03o}, skipping.")
 
