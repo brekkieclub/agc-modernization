@@ -1,16 +1,15 @@
-# Step 1: Basic Instruction Set (Mocked)
-def load_instruction(code):
-    return {"opcode": code, "exec": lambda: print(f"Executing {code}")}
+from agc.cpu import AGC
+from agc.loader import load_agc_memory
 
-# Step 2: Simple Memory Model
-memory = [0] * 1024
+def main():
+    agc = AGC()
+    load_agc_memory(agc, "core_dump.agc")
 
-# Step 3: Instruction Decoder (Mocked)
-def decode_instruction(address):
-    opcode = memory[address]
-    return load_instruction(opcode)
+    for cycle in range(50):
+        halted = agc.cycle()
+        if halted:
+            print(f"[AGC] HALT at PC={agc.PC:04o}")
+            break
 
 if __name__ == "__main__":
-    memory[0] = "TC"
-    instr = decode_instruction(0)
-    instr["exec"]()
+    main()
